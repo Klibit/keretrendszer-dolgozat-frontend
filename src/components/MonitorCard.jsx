@@ -12,7 +12,18 @@ function MonitorCard(props) {
                     {monitor.type}
                 </div>
                 <div className="card-body">
-
+                    <table className="table">
+                        <tbody>
+                            <tr>
+                                <th>Ár</th>
+                                <td>{monitor.price}</td>                       
+                            </tr>
+                            <tr>
+                                <th>Elérhetőség</th>
+                                <td>{monitor.availibility}</td>                       
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 

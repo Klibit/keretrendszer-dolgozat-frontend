@@ -5,6 +5,7 @@ import './App.css';
 import MonitorCard from './components/MonitorCard';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import MonitorForm from './components/MonitorForm';
 
 
 function App() {
@@ -22,12 +23,43 @@ function App() {
 
   }
 
+  const createMonitor = async (monitor) => {
+    const response = await fetch(backend_url, {
+      method: "POST",
+      body: JSON.stringify(monitor),
+      headers: {
+        "Content-Type": "application6json",
+        Accept: "applicatoion/json"
+      }
+    }
+  )
+  const data = await response.json();
+  console.log(data);
+  if(response.ok){
+    readMonitors();
+    return true;
+  }else {
+    alert(data.message)
+    return false;
+  }
+
+};
+
   return (
 
     <main className='container'>
+      <section>
+        <h2>Monitor felvétele</h2>
+        <MonitorForm onSubmit={createMonitor}/>
+      </section>
+      <section>
+      <h2>Monitorok</h2>
       <div className='row row-cols-lg-2 row-cols-1'>
         {monitors.map(monitor => <MonitorCard monitor = {monitor} key={monitor.id} />)}
       </div>
+      </section>
+
+
     </main>
   )
 }
